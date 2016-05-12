@@ -18,3 +18,7 @@ To run the API server:
 Then, to call the API and get the ads 1km near a point:
 
 ```curl http://localhost:4567/ads?lat=-22.360462\&long=-7.810437\&radius=1```
+
+Now, to open the web page, run the following on project root directory:
+
+```php -S localhost:8080```
