@@ -3,7 +3,7 @@
 require 'optparse'
 require 'redis'
 
-#REDIS_BIN=~/Projects/OLX/redis/redis_with_modules/src/redis-cli
+# Default options
 $options = {
 	:verbose => false,
 	:entries => 10,
@@ -15,6 +15,7 @@ $options = {
 	:long_min => -7.648387,
 	:long_max => -8.257701
 }
+
 OptionParser.new do |opts|
 	opts.banner = "Usage: example.rb [options]"
 
@@ -44,12 +45,31 @@ def echo(text)
 	end
 end
 
-redis = Redis.new(:host => $options[:redis_host], :port => $options[:redis_port])
+start_time = Time.now
+redis_time = 0
 
-1.upto($options[:entries]).each do |i|
+print "Connecting to redis... "
+tmp_time = Time.now
+redis = Redis.new(:host => $options[:redis_host], :port => $options[:redis_port])
+redis_time += Time.now - tmp_time
+puts "OK"
+
+print "Creating #{$options[:entries]} entries on redis... "
+echo("")
+i = 0
+while i < $options[:entries] do
+	i+=1
 	lat = ($options[:lat_max]-$options[:lat_min]) * rand() + $options[:lat_min]
 	long = ($options[:long_max]-$options[:long_min]) * rand() + $options[:long_min]
 	echo("member#{i}: {lat:#{lat}, long: #{long}}")
 
+	tmp_time = Time.now
 	redis.geoadd($options[:geo_key], long, lat, "member#{i}")
+	redis_time += Time.now - tmp_time
 end
+puts "OK"
+
+total_time = Time.now - start_time
+puts "Total Execution time: #{total_time}s"
+puts "Redis tasks execution time: #{redis_time}s"
+puts "Script execution time: #{total_time-redis_time}s"
