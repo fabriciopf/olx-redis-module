@@ -33,6 +33,7 @@ end
 
 get '/ads' do
 	content_type :json
+	headers "Access-Control-Allow-Origin" => "http://localhost:8080"
 
 	lat = params['lat']
 	long = params['long']
