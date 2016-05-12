@@ -10,3 +10,11 @@ Before running the script:
 And then, run the following to insert 1000 entries in a local redis database:
 
 ```./populate.rb -e 1000```
+
+To run the API server:
+
+```./geoapp.rb```
+
+Then, to call the API and get the ads 1km near a point:
+
+```curl http://localhost:4567/ads?lat=-22.360462\&long=-7.810437\&radius=1```
