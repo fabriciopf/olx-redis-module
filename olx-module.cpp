@@ -14,7 +14,7 @@ bool compare_second_element_pair(const std::pair<RedisModuleCallReply*,int> &lef
 int OlxGetAdsNearMeBetweenRadiuses_RedisCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) {
     //RedisModule_AutoMemory(ctx);
 
-    RedisModuleCallReply* adsReply = RedisModule_Call(ctx, "GEORADIUS", "csssccc", "ads", argv[2], argv[1], argv[4], "m", "withcoord", "withdist");
+    RedisModuleCallReply* adsReply = RedisModule_Call(ctx, "GEORADIUS", "csssccc", "ads:geo", argv[2], argv[1], argv[4], "m", "withcoord", "withdist");
     RedisModuleCallReply* adGeoReply = NULL;
     std::list<std::pair<RedisModuleCallReply*, int> > adsSortedSet;
 
