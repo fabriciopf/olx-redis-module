@@ -9,7 +9,7 @@ $options = {
 	:entries => 10,
 	:redis_host => "localhost",
 	:redis_port => 6379,
-	:geo_key => "ads:geo",
+	:geo_key => "ads",
 	:lat_min => -32.641688,
 	:lat_max => 3.488748,
 	:long_min => -7.648387,
@@ -65,6 +65,8 @@ while i < $options[:entries] do
 
 	tmp_time = Time.now
 	redis.geoadd($options[:geo_key], long, lat, "member#{i}")
+	redis.hmset("member#{i}", "price", (rand() * 1000).to_i, "random_number", rand() * 10000)
+	#redis.hmset("ads.member#{i}", "price", rand() * 1000, "random_number", rand() * 10000)
 	redis_time += Time.now - tmp_time
 end
 puts "OK"
