@@ -9,11 +9,11 @@ $options = {
 	:entries => 10,
 	:redis_host => "localhost",
 	:redis_port => 6379,
-	:geo_key => "ads",
-	:lat_min => -32.641688,
-	:lat_max => 3.488748,
-	:long_min => -7.648387,
-	:long_max => -8.257701
+	:geo_key => "ads:geo",
+	:lat_min => -32.212510,
+	:lat_max => -0.483049,
+	:long_min => -73.559562,
+	:long_max => -35.349113
 }
 
 OptionParser.new do |opts|
