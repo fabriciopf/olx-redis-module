@@ -18,7 +18,7 @@ And then, run the following to insert 1000 entries in a local redis database:
 
 To run the API server:
 
-```./geoapp.rb```
+``` ./geoapp.rb  ```
 
 Then, to call the API and get the ads 1km near a point:
 
